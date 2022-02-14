@@ -12,6 +12,8 @@ Vue.component('CoinDetail', {
     toggleShowPrices() {
       this.showPrices = !this.showPrices;
       // this.coin.color = this.coin.color.split('').reverse().join('');
+
+      this.$emit('change-color')
     }
   },
 
@@ -80,7 +82,6 @@ new Vue({
         symbol: 'BTC',
         img: "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
         changePercent: 0,
-        color: 'f4f4f4',
         price: 8400,
 
         pricesWithDays: [
@@ -93,13 +94,13 @@ new Vue({
           { day: 'Domingo', value: 10200 },
         ],
       },
+      color: 'f4f4f4',
     };
   },
 
-  // methods: {
-  //   toggleShowPrices() {
-  //     this.showPrices = !this.showPrices;
-  //     this.color = this.color.split('').reverse().join('');
-  //   }
-  // },
+  methods: {
+    updateColor() {
+      this.color = this.color.split('').reverse().join('');
+    }
+  },
 });
