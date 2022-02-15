@@ -2,5 +2,14 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import "@/assets/css/tailwind.css";
 import router from "@/router";
+import { dollarFilter, percentFilter } from "@/filters";
 
-createApp(App).use(router).mount("#app");
+// Vue.filter("dollar", dollarfilter);
+const app = createApp(App).use(router);
+
+app.config.globalProperties.$filters = {
+  dollarFilter,
+  percentFilter,
+};
+
+app.mount("#app");

@@ -15,14 +15,34 @@
     </thead>
     <tbody>
       <tr
+        v-for="item in assets"
         class="border-b border-gray-200 hover:bg-gray-100 hover:bg-orange-100"
+        :key="item.id"
       >
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>
+          <img
+            class="w-8"
+            :src="`https://static.coincap.io/assets/icons/${item.symbol.toLowerCase()}@2x.png`"
+            :alt="item.name"
+          />
+        </td>
+        <td>
+          <b># {{ item.rank }}</b>
+        </td>
+        <td>
+          {{ item.name }}
+        </td>
+        <td>{{ $filters.dollarFilter(item.priceUsd) }}</td>
+        <td>{{ $filters.dollarFilter(item.marketCapUsd) }}</td>
+        <td
+          :class="
+            item.changePercent24Hr.includes('-')
+              ? 'text-red-600'
+              : 'text-green-600'
+          "
+        >
+          {{ $filters.percentFilter(item.changePercent24Hr) }}
+        </td>
         <td class="hidden sm:block"></td>
       </tr>
     </tbody>
