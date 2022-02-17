@@ -30,7 +30,16 @@
           <b># {{ item.rank }}</b>
         </td>
         <td>
-          {{ item.name }}
+          <router-link
+            class="underline hover:no-underline text-green-600 font-semibold"
+            :to="{ name: 'coin-detail', params: { id: item.id } }"
+          >
+            {{ item.name }}
+          </router-link>
+          <span
+            class="ml-1 rounded-full text-sm text-white bg-gray-400 px-2 mr-2"
+            >{{ item.symbol }}</span
+          >
         </td>
         <td>{{ $filters.dollarFilter(item.priceUsd) }}</td>
         <td>{{ $filters.dollarFilter(item.marketCapUsd) }}</td>
@@ -43,18 +52,29 @@
         >
           {{ $filters.percentFilter(item.changePercent24Hr) }}
         </td>
-        <td class="hidden sm:block"></td>
+        <td class="hidden sm:block">
+          <px-button @custom-click="goToCoin(item.id)"
+            ><span>Ver Detalle</span></px-button
+          >
+        </td>
       </tr>
     </tbody>
   </table>
 </template>
 <script>
+import PxButton from "@/components/PxButton";
 export default {
   name: "PxAssetsTable",
+  components: { PxButton },
   props: {
     assets: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    goToCoin(id) {
+      this.$router.push({ name: "coin-detail", params: { id } });
     },
   },
 };

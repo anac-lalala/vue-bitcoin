@@ -5,7 +5,19 @@ function getAssets() {
     .then((res) => res.json())
     .then((res) => res.data);
 }
+function getAsset(coin) {
+  return fetch(`${url}/assets/${coin}`)
+    .then((res) => res.json())
+    .then((res) => res.data);
+}
+function getAssetHistory(coin) {
+  return fetch(`${url}/assets/${coin}/history?interval=d1`)
+    .then((res) => res.json())
+    .then((res) => res.data);
+}
 
 export default {
   getAssets,
+  getAsset,
+  getAssetHistory,
 };
